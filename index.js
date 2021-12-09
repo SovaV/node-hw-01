@@ -34,8 +34,16 @@ function invokeAction({ action, id, name, email, phone }) {
 
 invokeAction(argv);
 
+// ============== з COMMAND потрібно добавити в ДЖЕЙСОН ID: "" ==========================
+
 // const { Command } = require("commander");
 // const program = new Command();
+// const {
+//   listContacts,
+//   getContactById,
+//   addContact,
+//   removeContact,
+// } = require("./contacts");
 // program
 //   .option("-a, --action <type>", "choose action")
 //   .option("-i, --id <type>", "user id")
@@ -51,19 +59,22 @@ invokeAction(argv);
 // function invokeAction({ action, id, name, email, phone }) {
 //   switch (action) {
 //     case "list":
-//       // ...
+//       listContacts().then((data) => console.table(data));
 //       break;
 
 //     case "get":
-//       // ... id
-//       break;
-
-//     case "add":
-//       // ... name email phone
+//       getContactById(id).then((getContact) => console.table(getContact));
+//       console.log("id", id);
 //       break;
 
 //     case "remove":
-//       // ... id
+//       removeContact(id).then((deletedContact) => console.table(deletedContact));
+//       break;
+
+//     case "add":
+//       addContact(name, email, phone).then((contacts) =>
+//         console.table(contacts)
+//       );
 //       break;
 
 //     default:
