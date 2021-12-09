@@ -8,7 +8,8 @@ const contactsPath = path.join(__dirname, "./db/contacts.json");
 async function listContacts() {
   try {
     const data = await fs.readFile(contactsPath, "utf8");
-    console.table(JSON.parse(data));
+    const result = JSON.parse(data);
+    return result;
   } catch (error) {
     console.error(error);
   }
@@ -19,7 +20,6 @@ async function getContactById(contactId) {
     const data = await fs.readFile(contactsPath, "utf8");
     const contacts = JSON.parse(data);
     const getContact = contacts.filter(({ id }) => id === contactId);
-    console.table(getContact);
     return getContact;
   } catch (error) {
     console.error(error);
@@ -31,13 +31,12 @@ async function removeContact(contactId) {
     const data = await fs.readFile(contactsPath, "utf8");
     const contacts = JSON.parse(data);
     const deletedContact = contacts.filter(({ id }) => id !== contactId);
-    console.table(deletedContact);
     await fs.writeFile(
       contactsPath,
       JSON.stringify(deletedContact, null, 2),
       "utf8"
     );
-    return;
+    return deletedContact;
   } catch (error) {
     console.error(error);
   }
@@ -53,9 +52,8 @@ async function addContact(name, email, phone) {
       phone,
     };
     const contacts = JSON.parse(data).concat(newContact);
-    console.table(contacts);
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2), "utf8");
-    return;
+    return contacts;
   } catch (error) {
     console.error(error);
   }
